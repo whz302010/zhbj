@@ -40,6 +40,7 @@ import util.HandleData;
 import util.MyHttpUtil;
 import util.SpreUtil;
 import util.ToastUtil;
+import view.PullToListView;
 
 /**
  * Created by acer on 2017/7/27.
@@ -48,7 +49,7 @@ import util.ToastUtil;
 public class TabDetailPager extends SlideDetailPager {
     private  NewsMenu.NewsTabData tabNewsData;
     private TextView textView;
-    private ListView lv_hotNews;
+    private PullToListView lv_hotNews;
     private ViewPager viewPager;
     private TextView tv_news_title;
     private CirclePageIndicator circlePageIndicator;
@@ -68,11 +69,18 @@ public class TabDetailPager extends SlideDetailPager {
     public View initView() {
         View view = View.inflate(activity, R.layout.tab_detail_pager, null);
         headViewpager = View.inflate(activity, R.layout.tab_detail_head, null);
-        lv_hotNews = (ListView) view.findViewById(R.id.lv_tab);
+        lv_hotNews = (PullToListView) view.findViewById(R.id.lv_tab);
         viewPager = (ViewPager) headViewpager.findViewById(R.id.vp_tab);
         tv_news_title = (TextView) headViewpager.findViewById(R.id.tv_hotnews_title);
         circlePageIndicator = (CirclePageIndicator) headViewpager.findViewById(R.id.circleindicator);
         lv_hotNews.addHeaderView(headViewpager);
+        lv_hotNews.setOnRefreshListener(new PullToListView.onRefreshCompleted() {
+            @Override
+            public void onRefresh() {
+
+                getDataFromServor();
+            }
+        });
         return view;
     }
 
@@ -129,11 +137,15 @@ public class TabDetailPager extends SlideDetailPager {
                 processData(result);
                 ToastUtil.showTaost("tabDetail网络请求成功",activity);
                 SpreUtil.putString(activity,tabDetailUrl,result);
+                lv_hotNews.onRefreshCompleted(true);
+
             }
 
             @Override
             public void onFailure(HttpException error, String msg) {
                 ToastUtil.showTaost("tadetail网络请求失败",activity);
+                lv_hotNews.onRefreshCompleted(false);
+
             }
         });
     }
