@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+      >
+        <view.TopNewsViewPager
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/vp_tab">
+
+        </view.TopNewsViewPager>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="#a000"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_alignParentLeft="true"
+                android:textColor="#fff"
+                android:textSize="16sp"
+                android:padding="5dp"
+                android:id="@+id/tv_hotnews_title"/>
+            <com.viewpagerindicator.CirclePageIndicator
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/circleindicator"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:layout_centerVertical="true"
+                android:paddingLeft="5dp"
+                app:fillColor="#f00"
+                app:pageColor="#ccc"
+                app:snap="@bool/default_circle_indicator_snap"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+</LinearLayout>

@@ -1,5 +1,6 @@
 package fragment;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,7 +15,7 @@ import android.view.ViewGroup;
 
 public abstract class BaseFragment extends Fragment {
 
-    public FragmentActivity mActivity;
+    public Activity mActivity;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,6 +34,7 @@ public abstract class BaseFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initData();
+
     }
 
     public abstract View initView();

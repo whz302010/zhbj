@@ -1,11 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 24
     buildToolsVersion "26.0.0"
+    useLibrary 'org.apache.http.legacy'
     defaultConfig {
         applicationId "com.example.acer.zhbj"
-        minSdkVersion 23
+        minSdkVersion 16
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -30,6 +31,9 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.specyci:residemenu:1.6+'
     testCompile 'junit:junit:4.12'
+    compile 'com.google.code.gson:gson:2.2.4'
+    compile 'com.jiechic.library:xUtils:2.6.14'
+    compile project(':library')
+    compile project(':slidelibrary')
 }

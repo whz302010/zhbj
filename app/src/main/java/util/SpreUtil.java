@@ -16,7 +16,7 @@ public class SpreUtil {
         SharedPreferences sp = context.getSharedPreferences("cinfig", Context.MODE_PRIVATE);
         sp.edit().putBoolean(key,value).apply();
     }
-    public static String getBoolean(Context context,String key,String defValue){
+    public static String getString(Context context,String key,String defValue){
         SharedPreferences sp = context.getSharedPreferences("cinfig", Context.MODE_PRIVATE);
         return sp.getString(key,defValue);
     }

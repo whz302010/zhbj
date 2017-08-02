@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/title_red_bg">
+<ImageButton
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerVertical="true"
+    android:layout_marginLeft="15dp"
+    android:padding="5dp"
+    android:background="@drawable/img_menu"
+    android:id="@+id/ib_title"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="新聞中心"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:id="@+id/tv_bar_title"/>
+</RelativeLayout>
