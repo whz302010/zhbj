@@ -4,14 +4,26 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/title_red_bg">
-<ImageButton
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_centerVertical="true"
-    android:layout_marginLeft="15dp"
-    android:padding="5dp"
-    android:background="@drawable/img_menu"
-    android:id="@+id/ib_title"/>
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp">
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:background="@drawable/img_menu"
+            android:id="@+id/ib_title"/>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ib_back"
+            android:visibility="gone"
+            android:padding="10dp"
+            android:background="@drawable/back"/>
+    </FrameLayout>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -22,4 +34,37 @@
         android:textColor="#fff"
         android:textSize="20sp"
         android:id="@+id/tv_bar_title"/>
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ib_font"
+       android:layout_toLeftOf="@+id/ib_share"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:padding="10dp"
+        android:visibility="gone"
+        android:background="@drawable/icon_textsize"
+        />
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:padding="10dp"
+         android:layout_marginRight="10dp"
+        android:id="@+id/ib_share"
+        android:visibility="gone"
+        android:background="@drawable/icon_share"
+
+        />
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ib_list_grid"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:padding="10dp"
+        android:visibility="gone"
+        android:background="@drawable/icon_pic_list_type"/>
 </RelativeLayout>

@@ -2,9 +2,12 @@ package com.example.acer.zhbj.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
@@ -14,6 +17,8 @@ import android.widget.ImageView;
 
 import util.SpreUtil;
 import com.example.acer.zhbj.R;
+
+import org.zackratos.ultimatebar.UltimateBar;
 
 public class SplashActivity extends Activity {
 
@@ -26,6 +31,8 @@ public class SplashActivity extends Activity {
         super.onCreate(savedInstanceState);
 //        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_splash);
+        UltimateBar ultimateBar = new UltimateBar(this);
+        ultimateBar.setColorBar(Color.RED,0);
         mBackground = (ImageView) findViewById(R.id.splash_bg);
        initAnima();
         isFirst = SpreUtil.getBoolean(getApplicationContext(),ISFIST,true);

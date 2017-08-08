@@ -120,7 +120,6 @@ private void setSlideEnable(boolean slide){
             View mRootView = tabDetailPager.mRootView;
             container.addView(mRootView);
             //初始化数据
-
                 tabDetailPager.initData();
 
 

@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 24
+    compileSdkVersion 26
     buildToolsVersion "26.0.0"
     useLibrary 'org.apache.http.legacy'
     defaultConfig {
         applicationId "com.example.acer.zhbj"
-        minSdkVersion 24
+        minSdkVersion 21
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -29,11 +29,13 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:26.+'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    testCompile 'junit:junit:4.12'
-    compile 'com.google.code.gson:gson:2.2.4'
-    compile 'com.jiechic.library:xUtils:2.6.14'
     compile project(':library')
     compile project(':slidelibrary')
+    compile files('libs/ShareSDK-Core-3.0.1.jar')
+    compile 'com.android.support:appcompat-v7:26.+'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.google.code.gson:gson:2.2.4'
+    compile 'com.jiechic.library:xUtils:2.6.14'
+    compile 'org.zackratos:ultimatebar:1.0.3'
+    testCompile 'junit:junit:4.12'
 }

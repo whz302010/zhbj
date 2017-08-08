@@ -23,6 +23,7 @@ public class BasePager {
     public FrameLayout fl_container;
     private MainActivity UiMain;
     public View mView;
+    public ImageButton iv_list_grid;
 
     public BasePager(Activity activity){
         mActivity=activity;
@@ -56,6 +57,7 @@ public class BasePager {
         ib_title = (ImageButton) mView.findViewById(R.id.ib_title);
         tv_bar_title = (TextView) mView.findViewById(R.id.tv_bar_title);
         fl_container = (FrameLayout) mView.findViewById(R.id.vp_container);
+        iv_list_grid= (ImageButton) mView.findViewById(R.id.ib_list_grid);
         return mView;
     }
 }

@@ -3,6 +3,7 @@ package base;
 import android.app.Activity;
 import android.content.Context;
 import android.view.View;
+import android.widget.ImageButton;
 
 /**
  * Created by acer on 2017/7/24.
@@ -11,6 +12,7 @@ import android.view.View;
 public abstract class SlideDetailPager {
     public  Activity activity;
     public View mRootView;
+
 
 
     public SlideDetailPager(Activity activity){

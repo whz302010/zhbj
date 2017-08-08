@@ -65,7 +65,7 @@ public class NewsCenterPager extends BasePager {
             NewsSlidePager newsSlidePager = new NewsSlidePager(mActivity, newsCenterData.data.get(0).children);
             mSlidePagers.add(newsSlidePager);
             mSlidePagers.add(new TopicSLidePager(mActivity));
-            mSlidePagers.add(new PhotoSlidePager(mActivity));
+            mSlidePagers.add(new PhotoSlidePager(mActivity,iv_list_grid));
             mSlidePagers.add(new InteractiveSlidePager(mActivity));
             setCurrentDetailPager(0);
         }
@@ -109,5 +109,14 @@ public class NewsCenterPager extends BasePager {
 
         //更新标题
         tv_bar_title.setText(newsCenterData.data.get(position).title);
+        if (slideDetailPager instanceof PhotoSlidePager){
+            iv_list_grid.setVisibility(View.VISIBLE);
+            iv_list_grid.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
+        }
     }
 }

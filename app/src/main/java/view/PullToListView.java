@@ -8,6 +8,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
+import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -23,7 +24,7 @@ import java.util.Date;
  * Created by acer on 2017/8/2.
  */
 
-public class PullToListView extends ListView {
+public class PullToListView extends ListView implements AbsListView.OnScrollListener{
 
     private int startY=-1;
     private final int STATE_PULL_TO_REFRESH=1;
@@ -40,24 +41,45 @@ public class PullToListView extends ListView {
     private ProgressBar pb_loading;
     @ViewInject(R.id.iv_arr)
     private ImageView iv_arr;
+    @ViewInject(R.id.pb_footer)
+    private ProgressBar pb_footer;
+  @ViewInject(R.id.tv_loadmore)
+    private TextView tv_loadmore;
     private RotateAnimation rotateUP;
     private RotateAnimation rotateDown;
     public onRefreshCompleted refreshListener;
+    private View footView;
+    private int mFooterHeight;
+    private boolean isLoadMore=false;
 
 
     public PullToListView(Context context) {
         super(context);
         initHeadView();
+        initFooter();
     }
 
 
     public PullToListView(Context context, AttributeSet attrs) {
         super(context, attrs);
         initHeadView();
+        initFooter();
     }
     public PullToListView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initHeadView();
+        initFooter();
+    }
+
+    private void initFooter() {
+        footView = View.inflate(getContext(), R.layout.footer_pull_to_refresh, null);
+        footView.measure(0,0);
+        mFooterHeight = footView.getMeasuredHeight();
+        ViewUtils.inject(this,footView);
+        footView.setPadding(0,0,0,-mFooterHeight);
+        addFooterView(footView);
+        this.setOnScrollListener(this);
+
     }
 
     private void initHeadView() {
@@ -90,25 +112,31 @@ public class PullToListView extends ListView {
                 if (mCurrentState==STATE_REFRESHING){
                     break;
                 }
+
+                if (isLoadMore){
+                    break;
+                }
+
                 int endY= (int) ev.getY();
                 int dy=endY-startY;
                 int firstVisiblePosition = getFirstVisiblePosition();
                 int padding=dy-measuredHeight;
                 if (dy>0&&firstVisiblePosition==0){
                     view.setPadding(0,padding,0,0);
-
                     if (dy>measuredHeight+10&&mCurrentState!=STATE_RELEASE_TO_REFREASH){
                         mCurrentState=STATE_RELEASE_TO_REFREASH;
                         refresh();
-                    }else if (mCurrentState!=STATE_PULL_TO_REFRESH){
-                            mCurrentState=STATE_PULL_TO_REFRESH;
-                            refresh();
-
+                    }else {
+                        if (mCurrentState!=STATE_PULL_TO_REFRESH){
+                        mCurrentState=STATE_PULL_TO_REFRESH;
+                        refresh();
+                        }
                     }
                 }
-
-
+//
+//            startY= (int) ev.getY();
                 break;
+
             case MotionEvent.ACTION_UP:
                 startY=-1;
                 if (mCurrentState==STATE_RELEASE_TO_REFREASH){
@@ -146,8 +174,29 @@ public class PullToListView extends ListView {
                     break;
             }
     }
-  public interface onRefreshCompleted{
+    //滑动状态改变
+    @Override
+    public void onScrollStateChanged(AbsListView view, int scrollState) {
+       if (scrollState==SCROLL_STATE_IDLE){
+           if (getLastVisiblePosition()==getCount()-1){
+
+               footView.setPadding(0,0,0,0);
+               setSelection(getCount()-1);
+               refreshListener.onLoadMore();
+               isLoadMore=true;
+           }
+       }
+
+    }
+//滑动过程监听
+    @Override
+    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+
+    }
+
+    public interface onRefreshCompleted{
         void onRefresh( );
+        void onLoadMore();
     }
     public void setOnRefreshListener(onRefreshCompleted onRefreshListener){
         this.refreshListener=onRefreshListener;
@@ -166,6 +215,16 @@ public class PullToListView extends ListView {
         tv_titl.setText("下拉刷新");
         if (success){
             setCurrentDate();
+        }
+    }
+    public void loadCompleted(boolean hasMore){
+        isLoadMore=false;
+        if (hasMore){
+            footView.setPadding(0,0,0,-mFooterHeight);
+        }else {
+            pb_loading.setVisibility(GONE);
+            tv_loadmore.setText("没有更多数据了。。。。。");
+
         }
     }
 
